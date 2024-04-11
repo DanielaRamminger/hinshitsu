@@ -1,0 +1,393 @@
+/*!
+Theme Name: Hinshitsu Theme
+Author: Daniela Ramminger
+Description: WordPress Theme - Hinshitsu
+Tested up to: 6.5
+Requires at least: 6.0
+Requires PHP: 8.0
+*/
+@charset "UTF-8";
+
+
+
+:root {
+    --base-bg-color: #070707;
+    --base-color: #b9aeae;
+    --navbar-bg-color: rgba(255, 255, 255, 0);
+    --primary-color: #ec2fb3;
+    --primary-rgb: 0, 192, 255;
+    --secondary-color: #272521;
+
+    --nav-height-mobile: 60px;
+    --nav-height-desktop: 100px;
+    --parallax-bg-color: #ffffff;
+}
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    line-height: 1.4;
+    scroll-behavior: smooth;
+}
+
+@media screen and (min-width:1200px) {
+    html {
+        font-size: 20px;
+    }
+}
+body {
+    
+    margin: 0;
+    background: linear-gradient(180deg, var(--base-bg-color) 0, var(--secondary-color) 100%);
+    background-attachment: fixed;
+    color: var(--base-color);
+    font-family: 'poppins', sans-serif;
+    font-weight: 300;
+}
+
+
+
+
+
+
+h1 {
+    font-weight: 600;
+    padding: 0 20px;
+
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+    font-weight: 600;
+}
+
+h1 {
+    font-size: clamp(1.965em, 7vw, 70px);
+    line-height: 1.2;
+    margin-top: 1.5em;
+
+}
+
+h2 {
+    font-size: clamp(1.53em, 4vw, 40px);
+    line-height: 1.1;
+
+}
+
+h3 {
+    font-size: 1.4em;
+
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+h5 {
+    font-size: 1.1em;
+}
+
+h6 {
+    font-size: 1em;
+}
+
+
+
+.is-style-headline::after {
+    content: "";
+    display: block;
+    width: 190px;
+    height: 4px;
+    background-color: var(--primary-color);
+    transform: translateX(-10px);
+}
+
+img:not([src$="svg"]) {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+
+
+}
+.screen-reader-text{
+    display:none;
+}
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    height: var(--nav-height-mobile);
+    background-color: var(--navbar-bg-color);
+    
+    
+}
+
+#navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--nav-height-mobile);
+    padding: 0 20px;
+   
+}
+.container{
+    background-color:var(--navbar-bg-color)
+    backdrop-filter: blur(10px); 
+}
+
+@media screen and (min-width: 900px) {
+
+    #navbar,
+    #navbar .container {
+        height: var(--nav-height-desktop);
+    }
+}
+
+#brand {
+    height: 60px;
+
+
+}
+
+@media screen and (min-width: 900px) {
+    #brand {
+        height: 100px;
+    }
+}
+
+#brand img {
+    height: 100%;
+
+
+
+}
+
+
+
+#brand img:not([src$=svg]) {
+    width: auto;
+
+
+}
+
+.nav-menu,
+.sub-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-main {
+    position: fixed;
+    top: var(--nav-height-mobile);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--navbar-bg-color);
+    padding: 2rem 15px;
+    text-align: center;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease-in-out;
+}
+
+@media screen and (min-width: 900px) {
+    #nav-main {
+        position: static;
+        opacity: 1;
+        pointer-events: all;
+        background-color: transparent;
+        padding: 0;
+        display: flex;
+        gap: 2em;
+        overflow: visible;
+    }
+}
+
+#nav-main a {
+    display: inline-block;
+    color: var(--base-color);
+    text-decoration: none;
+    padding: 1em 0;
+    font-weight: 500;
+}
+
+#nav-main a:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+#nav-main a:active {
+    color: var(--secondary-color);
+}
+
+#nav-main .current-menu-item>a {
+    color: var(--primary-color);
+}
+
+#nav-main>li>a {
+    font-size: 1.765em;
+}
+
+@media screen and (min-width: 900px) {
+    #nav-main>li {
+        position: relative;
+    }
+
+    #nav-main>li>a {
+        font-size: 1em;
+        padding: 0;
+        line-height: var(--nav-height-desktop);
+    }
+
+    #nav-main .sub-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 200px;
+        background-color: var(--navbar-bg-color);
+        backdrop-filter: blur(30px);
+        transform: translateX(-50%);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 200ms ease-in-out;
+        border-radius: 12px;
+        padding: .5em 0;
+    }
+
+    #nav-main .sub-menu::before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 10px 16px 10px;
+        border-color: transparent transparent var(--base-bg-color) transparent;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -100%);
+    }
+
+    #nav-main li:hover>.sub-menu {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+}
+
+#menu-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 900px) {
+    #menu-button {
+        display: none;
+    }
+}
+
+#menu-button-icon,
+#menu-button-icon::before,
+#menu-button-icon::after {
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: var(--base-color);
+}
+
+#menu-button-icon {
+    position: relative;
+    transition: background-color 250ms linear;
+}
+
+#menu-button-icon::before,
+#menu-button-icon::after {
+    content: "";
+    transition: transform 250ms linear;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#menu-button-icon::before {
+    transform: translateY(-10px);
+}
+
+#menu-button-icon::after {
+    transform: translateY(10px);
+}
+
+#nav-toggle {
+    display: none;
+}
+
+#nav-toggle:checked~#menu-button #menu-button-icon {
+    background-color: transparent;
+}
+
+#nav-toggle:checked~#menu-button #menu-button-icon::before {
+    transform: rotate(-45deg);
+}
+
+#nav-toggle:checked~#menu-button #menu-button-icon::after {
+    transform: rotate(45deg);
+}
+
+#nav-toggle:checked~#nav-main {
+    opacity: 1;
+    pointer-events: all;
+}
+.hero {
+    display: flex;          
+    align-items: center;    
+    justify-content: flex-start; 
+    text-align: right;      
+  }
+
+  .hero-video {
+    
+    width: 100%;             
+    height: auto;            
+  }
+
+  .hero-text {
+    position: absolute;      
+    color: var(--base-color);
+    padding-left: 20px;
+    font-size: 48px;        
+   
+  }
+@media (min-width: 768px) {
+    .hero-video {
+      
+        min-width: 40%; 
+        min-height: 60%; 
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-video {
+        
+        min-width: 50%; 
+        min-height: 75%; 
+    }
+}
+
